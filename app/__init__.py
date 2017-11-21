@@ -8,8 +8,7 @@ def make_app():
 
     db.init_app(app)
 
-    @app.route("/api/hello")
-    def hello():
-        return "Hello World!"
+    from app.blueprints import ip_views
 
+    app.register_blueprint(ip_views.api, url_prefix='/api')
     return app
