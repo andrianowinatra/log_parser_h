@@ -53,4 +53,26 @@ def activity_list(host_ip, client_ip):
     }
 
     return render_template("layout_3.html", navigation=json_data["activities"], host_ip=host_ip, client_ip=client_ip)
+
+
+@api.route("/sql_i/")
+def sql_injection(host_ip):
+    """ return sql injection checks """
+
+    sql_i_queries = db.session.query(LogEntry.requested_resources, LogEntry.query_params).\
+        filter(LogEntry.query_params.like('%select %')).\
+        all()
+
+    json_data = {"activities": [
+        {"request_method": entry.request_method,
+         "requested_resources": entry.requested_resources,
+         "query_params": entry.query_params,
+         "client_username": entry.client_username,
+         "client_ip": entry.client_ip,
+         "client_ip_country": entry.client_ip_country,
+         "user_agent": entry.ua_string,
+         "referrer": entry.referrer,
+         "timestamp": entry.timestamp} for entry in sql_i_queries]
+    }
+
     return jsonify(json_data)
