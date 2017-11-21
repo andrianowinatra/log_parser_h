@@ -1,4 +1,4 @@
-from flask import jsonify, Blueprint
+from flask import jsonify, Blueprint, render_template
 
 from app.models import db, LogEntry
 
@@ -14,7 +14,7 @@ def ip_list():
         all()
 
     json_data = {"unique_ips": [ip_address.remote_host for ip_address in ip_query]}
-    return jsonify(json_data)
+    return render_template("layout.html", navigation=json_data["unique_ips"])
 
 
 @api.route("/traffic/<host_ip>")
@@ -30,8 +30,7 @@ def traffic_list(host_ip):
          "client_country": entry.client_ip_country,
          "client_count": entry.client_count} for entry in ip_activity_query]
     }
-
-    return jsonify(json_data)
+    return render_template("layout_2.html", navigation=json_data["unique_clients"], host_ip=host_ip)
 
 
 @api.route("/traffic/<host_ip>/<client_ip>")
@@ -53,4 +52,5 @@ def activity_list(host_ip, client_ip):
          "timestamp": entry.timestamp} for entry in ip_activity_query]
     }
 
+    return render_template("layout_3.html", navigation=json_data["activities"], host_ip=host_ip, client_ip=client_ip)
     return jsonify(json_data)

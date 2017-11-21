@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Log Parser H</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+</head>
+<body>
+    <div id=container>
+        <h4>{{host_ip}} / {{client_ip}}</h4>
+        <table class="table is-narrow is-bordered">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Request Method</th>
+                    <th>Requested Resources</th>
+                    <th>Query Params</th>
+                    <th>Client username</th>
+                    <th>User Agent</th>
+                    <th>Referrer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in navigation %}
+                <tr>
+                    <th>{{item.timestamp}}</a></th>
+                    <td>{{item.request_method}}</td>
+                    <td>{{item.requested_resources}}</td>
+                    <td>{{item.query_params}}</td>
+                    <td>{{item.client_username}}</td>
+                    <td>{{item.user_agent}}</td>
+                    <td>{{item.referrer}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

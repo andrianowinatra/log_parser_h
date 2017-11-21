@@ -10,5 +10,5 @@ def make_app():
 
     from app.blueprints import ip_views
 
-    app.register_blueprint(ip_views.api, url_prefix='/api')
+    app.register_blueprint(ip_views.api)
     return app
