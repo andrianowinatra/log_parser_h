@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.6.3-slim
+FROM python:3.6.3
 
 # Set the working directory to /app
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-RUN apt-get update && apt-get install libgeoip-dev -y && apt-get install python3-devel
+RUN apt-get update && apt-get install libgeoip-dev -y
 RUN pip install pipenv
 RUN pipenv install --system
 
