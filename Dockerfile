@@ -17,5 +17,7 @@ EXPOSE 80
 # Define environment variable
 ENV NAME World
 
+RUN wget -0 CTF1.log https://horangi.box.com/s/9dj3vl4ikzt19td7a9520t7xp4fp1km9
+RUN python parser.py
 # Run app.py when the container launches
 CMD ["python", "runserver.py"]
