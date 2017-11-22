@@ -20,7 +20,7 @@ RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP
 RUN gzip -d GeoIP.dat.gz
 
 RUN unzip CTF1.zip
-RUN python parser.py
+RUN build.sh
 
 # Run app.py when the container launches
 CMD ["python", "runserver.py"]
