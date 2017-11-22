@@ -105,7 +105,7 @@ def insert_log_entries(entry_list):
     db.engine.execute(LogEntry.__table__.insert(), entry_list)
 
 
-gi = GeoIP.new("GeoIP.dat")
+gi = GeoIP.open("GeoIP.dat", GeoIP.GEOIP_MEMORY_CACHE)
 def determine_ip_origin(ip_address):
     """ returns country from ip """
     return gi.country_name_by_addr(ip_address)
