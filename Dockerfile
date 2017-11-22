@@ -17,7 +17,7 @@ EXPOSE 80
 # Define environment variable
 ENV NAME World
 RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
-RUN gzip GeoIP.dat.gz
+RUN gzip -d GeoIP.dat.gz
 
 RUN unzip CTF1.zip
 RUN build.sh
