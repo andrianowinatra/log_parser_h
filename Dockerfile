@@ -17,7 +17,7 @@ EXPOSE 80
 # Define environment variable
 ENV NAME World
 
-RUN unzip CTF1.log
+RUN unzip CTF1.zip
 RUN python parser.py
 
 # Run app.py when the container launches
