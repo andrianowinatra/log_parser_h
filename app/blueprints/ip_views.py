@@ -55,7 +55,7 @@ def activity_list(host_ip, client_ip):
     return render_template("layout_3.html", navigation=json_data["activities"], host_ip=host_ip, client_ip=client_ip)
 
 
-@api.route("/sql_i/")
+@api.route("/sqli_exploit")
 def sql_injection(host_ip):
     """ return sql injection checks """
 
@@ -75,4 +75,55 @@ def sql_injection(host_ip):
          "timestamp": entry.timestamp} for entry in sql_i_queries]
     }
 
+    return jsonify(json_data)
+
+
+@api.route("/lfi_exploit")
+def lfi_exploit_list():
+    """ return entries that is affected by lfi attack """
+    lfi_exploit_queries = db.session.query(LogEntry.requested_resources, LogEntry.query_params).\
+        filter(LogEntry.query_params.like('%../../%')).\
+        all()
+
+    json_data = {"activities": [
+        {"request_method": entry.request_method,
+         "requested_resources": entry.requested_resources,
+         "query_params": entry.query_params,
+         "client_username": entry.client_username,
+         "client_ip": entry.client_ip,
+         "client_ip_country": entry.client_ip_country,
+         "user_agent": entry.ua_string,
+         "referrer": entry.referrer,
+         "timestamp": entry.timestamp} for entry in lfi_exploit_queries]
+    }
+
+    return jsonify(json_data)
+
+
+@api.route("/rfi_exploit")
+def rfi_exploit_list():
+
+    ip_list = db.session.query(LogEntry.client_ip).\
+        filter(LogEntry.query_params.like('%../../%')).\
+        distinct().\
+        all()
+
+    json_data = {"activities": []}
+    for ip in ip_list:
+        activity = db.session.query(LogEntry).\
+            filter(LogEntry.client_ip == ip.client_ip).\
+            filter(LogEntry.query_params.like('%http%')).\
+            filter(LogEntry.query_params.like('%.php')).\
+            all()
+        json_data["activities"].extend([
+            {"request_method": entry.request_method,
+             "requested_resources": entry.requested_resources,
+             "query_params": entry.query_params,
+             "client_username": entry.client_username,
+             "client_ip": entry.client_ip,
+             "client_ip_country": entry.client_ip_country,
+             "user_agent": entry.ua_string,
+             "referrer": entry.referrer,
+             "timestamp": entry.timestamp} for entry in activity]
+        )
     return jsonify(json_data)
