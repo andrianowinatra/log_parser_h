@@ -7,12 +7,16 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
 </head>
 <body>
-    <div id=container>
-        <h4>{{host_ip}} / {{client_ip}}</h4>
+    <div id=columns>
+        <div id=column>
+            <h4><a href="/">Back to Home</a></h4>
+            <h4>{{header}}</h4>
         <table class="table is-narrow is-bordered">
             <thead>
                 <tr>
                     <th>Timestamp</th>
+                    <th>Client IP<th>
+                    <th>Host IP</th>
                     <th>Request Method</th>
                     <th>Requested Resources</th>
                     <th>Query Params</th>
@@ -25,6 +29,8 @@
                 {% for item in navigation %}
                 <tr>
                     <th>{{item.timestamp}}</a></th>
+                    <th><a href="/traffic/{{item.client_ip}}">{{item.client_ip}}</a></th>
+                    <th>{{item.host_ip}}</a></th>
                     <td>{{item.request_method}}</td>
                     <td>{{item.requested_resources}}</td>
                     <td>{{item.query_params}}</td>
@@ -35,6 +41,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
     </div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id=container>
-        <h4>{{host_ip}}</h4>
+        <h4>List of unique IP traffic</h4>
         <table class="table">
             <thead>
                 <tr>
@@ -20,7 +20,7 @@
             <tbody>
                 {% for item in navigation %}
                 <tr>
-                    <th><a href="/traffic/{{host_ip}}/{{item.client_ip}}">{{item.client_ip}}</a></th>
+                    <th><a href="/traffic/{{item.client_ip}}">{{item.client_ip}}</a></th>
                     <td>{{item.client_country}}</td>
                     <td>{{item.client_count}}</td>
                 <tr>

@@ -8,9 +8,11 @@
 </head>
 <body>
     <div id=container>
-        {% for item in navigation %}
-            <li><a href="/traffic/{{ item }}">{{ item }}</a></li>
-        {% endfor %}
+        <ul><a href="/traffic"> Show list of unique IPs</a></ul>
+        <ul><a href="/sqli_exploit">Show entries of SQL Injections attempts</ul>
+        <ul><a href="/lfi_exploit">Show entries of Local File Injection attempts</ul>
+        <ul><a href="/rfi_exploit">Show entries of RFI attempts</ul>
+        <ul></ul>
     </div>
 </body>
 </html>
