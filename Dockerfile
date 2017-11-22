@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-RUN apt-get update && apt-get install libgeoip-dev unzip -y
+RUN apt-get update && apt-get install libgeoip-dev unzip gzip -y
 RUN pip install pipenv
 RUN pipenv install --system
 
@@ -16,6 +16,8 @@ EXPOSE 80
 
 # Define environment variable
 ENV NAME World
+RUN wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
+RUN gzip GeoIP.dat.gz
 
 RUN unzip CTF1.zip
 RUN python parser.py
