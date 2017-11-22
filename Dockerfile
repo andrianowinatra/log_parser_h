@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-RUN apt-get update && apt-get install libgeoip-dev -y
+RUN apt-get update && apt-get install libgeoip-dev unzip -y
 RUN pip install pipenv
 RUN pipenv install --system
 
