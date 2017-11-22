@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+    {% for item in navigation %}
+        <li><a href="/traffic/{{ item }}">{{ item }}</a></li>
+    {% endfor %}
+{% endblock %}

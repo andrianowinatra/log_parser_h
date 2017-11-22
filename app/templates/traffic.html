@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Log Parser H</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+</head>
+<body>
+    <div id=container>
+        <h4>List of unique IP traffic</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>IP address</th>
+                    <th>Country Origin</th>
+                    <th>Hit count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in navigation %}
+                <tr>
+                    <th><a href="/traffic/{{item.client_ip}}">{{item.client_ip}}</a></th>
+                    <td>{{item.client_country}}</td>
+                    <td>{{item.client_count}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
