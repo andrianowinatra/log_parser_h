@@ -14,3 +14,7 @@ def main():
             db.create_all()
         finally:
             print("initdb done")
+
+
+if __name__ == '__main__':
+    main()
