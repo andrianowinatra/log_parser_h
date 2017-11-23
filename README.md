@@ -12,6 +12,8 @@ Log Parser H is a flask powered web app that displays log entries.
 
 Log Parser H requires [Pipenv](https://http://pipenv.org//) to run.
 
+!Note, you need to have the _zipfile_ file inside log_parser_h before running anything
+
 Install the dependencies and run the build script. The script will take care of db creation and parsing before running the app.
 
 ```sh
